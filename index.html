@@ -119,30 +119,41 @@
     .playstore-share-btn:active{transform:scale(.95)}
 
     /* ============================================================
-       IN-APP BROWSER OVERLAY - IMPROVED
+       IN-APP BROWSER OVERLAY - SUPER JELAS BUAT BOCIL
        ============================================================ */
-    .iab-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;display:flex;align-items:flex-end;justify-content:center;animation:fadeInOverlay .3s ease}
+    .iab-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;animation:fadeInOverlay .3s ease}
     @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
-    .iab-box{background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;text-align:center;animation:slideUp .35s ease}
-    @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-    .iab-icon{font-size:3rem;margin-bottom:8px}
-    .iab-title{font-size:1.05rem;font-weight:800;color:#0f172a;margin-bottom:6px}
-    .iab-sub{font-size:.8rem;color:#64748b;line-height:1.5;margin-bottom:16px}
-    .iab-steps{background:#f0f6ff;border-radius:14px;padding:12px 14px;margin-bottom:16px;text-align:left}
-    .iab-step{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:700;color:#0f172a;padding:6px 0}
-    .iab-step+.iab-step{border-top:1px solid #dbeafe}
-    .iab-step-num{width:24px;height:24px;min-width:24px;border-radius:50%;background:#4096ff;color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center}
-    .iab-arrow{position:fixed;top:12px;right:12px;z-index:100000;animation:bounceArrow 1s ease-in-out infinite}
-    @keyframes bounceArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-    .iab-arrow-box{background:#f7931e;color:#fff;border-radius:12px;padding:8px 14px;font-size:.78rem;font-weight:800;display:flex;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(247,147,30,.5)}
-    .iab-close{background:#4096ff;color:#fff;border:none;border-radius:14px;padding:13px;width:100%;font-size:.88rem;font-weight:800;cursor:pointer;margin-top:4px}
-    .iab-dismiss{font-size:.72rem;color:#94a3b8;margin-top:10px;cursor:pointer;display:block;background:none;border:none;width:100%}
 
-    /* Loading spinner saat redirect Android */
-    .iab-loading{display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 0}
-    .iab-spinner{width:40px;height:40px;border:4px solid #dbeafe;border-top-color:#4096ff;border-radius:50%;animation:spin .8s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .iab-loading-text{font-size:.82rem;font-weight:700;color:#64748b}
+    /* Panah animasi nunjuk pojok kanan atas */
+    .iab-arrow-wrap{position:fixed;top:0;right:0;z-index:100001;display:flex;flex-direction:column;align-items:flex-end;padding:10px 10px 0 0;pointer-events:none}
+    .iab-arrow-line{width:3px;height:60px;background:linear-gradient(to top,#f7931e,transparent);border-radius:3px;margin-right:18px;animation:growLine .6s ease forwards}
+    @keyframes growLine{from{height:0;opacity:0}to{height:60px;opacity:1}}
+    .iab-arrow-head{font-size:2.2rem;animation:bounceUp .8s ease-in-out infinite;margin-right:4px}
+    @keyframes bounceUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .iab-arrow-label{background:#f7931e;color:#fff;border-radius:20px;padding:8px 16px;font-size:.82rem;font-weight:900;margin-top:6px;box-shadow:0 4px 18px rgba(247,147,30,.6);letter-spacing:.3px;text-align:center;animation:pulse-orange 1.5s ease-in-out infinite}
+    @keyframes pulse-orange{0%,100%{box-shadow:0 4px 18px rgba(247,147,30,.6)}50%{box-shadow:0 4px 28px rgba(247,147,30,.95)}}
+
+    /* Box bawah */
+    .iab-box{background:#fff;border-radius:28px 28px 0 0;padding:22px 20px 38px;width:100%;max-width:480px;text-align:center;animation:slideUp .4s cubic-bezier(.22,1,.36,1)}
+    @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .iab-icon{font-size:2.6rem;margin-bottom:6px}
+    .iab-title{font-size:1.08rem;font-weight:900;color:#0f172a;margin-bottom:5px}
+    .iab-sub{font-size:.8rem;color:#64748b;line-height:1.5;margin-bottom:14px}
+
+    /* Steps — pakai visual besar */
+    .iab-steps{background:#f0f6ff;border-radius:16px;padding:14px;margin-bottom:14px;text-align:left;border:1.5px solid #dbeafe}
+    .iab-step{display:flex;align-items:center;gap:12px;padding:8px 0}
+    .iab-step+.iab-step{border-top:1px solid #dbeafe}
+    .iab-step-num{width:30px;height:30px;min-width:30px;border-radius:50%;background:#f7931e;color:#fff;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .iab-step-text{font-size:.82rem;font-weight:700;color:#0f172a;line-height:1.4}
+    .iab-step-text b{color:#2563eb}
+
+    /* Highlight "titik 3" */
+    .iab-dots-badge{display:inline-flex;align-items:center;gap:4px;background:#0f172a;color:#fff;border-radius:8px;padding:2px 10px;font-size:.8rem;font-weight:900;letter-spacing:.5px;vertical-align:middle}
+
+    .iab-close{background:linear-gradient(135deg,#4096ff,#2563eb);color:#fff;border:none;border-radius:14px;padding:14px;width:100%;font-size:.92rem;font-weight:900;cursor:pointer;margin-top:2px;box-shadow:0 4px 14px rgba(37,99,235,.35);letter-spacing:.3px}
+    .iab-close:active{transform:scale(.97)}
+    .iab-dismiss{font-size:.7rem;color:#94a3b8;margin-top:10px;cursor:pointer;display:block;background:none;border:none;width:100%;text-decoration:underline}
 
     .toast-notif{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e293b;color:#fff;font-size:.8rem;font-weight:700;padding:9px 20px;border-radius:22px;box-shadow:0 4px 18px rgba(0,0,0,.3);z-index:9999;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap}
     .toast-notif.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -305,14 +316,15 @@
 <div class="toast-notif" id="toastNotif">✅ Link berhasil disalin!</div>
 
 <!-- IN-APP BROWSER OVERLAY -->
-<div class="iab-overlay" id="iabOverlay" style="display:none">
-  <div class="iab-arrow" id="iabArrow" style="display:none">
-    <div class="iab-arrow-box">
-      <i class="bi bi-three-dots-vertical"></i> Tap di sini dulu! ☝️
-    </div>
+<div class="iab-overlay" id="iabOverlay" style="display:none" onclick="handleOverlayClick(event)">
+  <!-- Panah animasi pojok kanan atas -->
+  <div class="iab-arrow-wrap" id="iabArrowWrap">
+    <div class="iab-arrow-head">👆</div>
+    <div class="iab-arrow-line"></div>
+    <div class="iab-arrow-label">Tap titik 3 di sini!</div>
   </div>
-  <div class="iab-box" id="iabBox">
-    <!-- Content akan diisi oleh JS sesuai platform -->
+  <!-- Box panduan bawah -->
+  <div class="iab-box" id="iabBox" onclick="event.stopPropagation()">
   </div>
 </div>
 
@@ -831,53 +843,55 @@ style="height:44px;width:44px;object-fit:cover;border-radius:10px;flex-shrink:0;
   };
 
   // ================================================================
-  // 📱 IN-APP BROWSER DETECTION v2
-  // Android: Auto-redirect ke Chrome via Android Intent URL
-  // iOS: Tampilkan overlay panduan
+  // 📱 IN-APP BROWSER DETECTION - SIMPLE & JELAS
+  // Langsung tampilkan panduan visual, tanpa loading/redirect
   // ================================================================
+  function handleOverlayClick(e) {
+    // Klik di luar box = tutup overlay
+    if (e.target === document.getElementById('iabOverlay')) {
+      document.getElementById('iabOverlay').style.display = 'none';
+    }
+  }
+
   function showIABOverlay(isIOS) {
     const overlay = document.getElementById('iabOverlay');
     const box = document.getElementById('iabBox');
-    const arrow = document.getElementById('iabArrow');
 
-    if (isIOS) {
-      // iOS: tampilkan arrow + langkah manual
-      arrow.style.display = 'flex';
-      box.innerHTML = `
-        <div class="iab-icon">🌐</div>
-        <div class="iab-title">Buka di Browser dulu ya!</div>
-        <div class="iab-sub">Kamu lagi buka via browser TikTok.<br>Biar WA, Discord & fitur lainnya bisa jalan,<br><strong>ikutin langkah ini:</strong></div>
-        <div class="iab-steps">
-          <div class="iab-step"><div class="iab-step-num">1</div><span>Tap ikon <strong>⋯ tiga titik</strong> di pojok kanan atas</span></div>
-          <div class="iab-step"><div class="iab-step-num">2</div><span>Pilih <strong>"Open in Safari"</strong> atau <strong>"Open in Browser"</strong></span></div>
-          <div class="iab-step"><div class="iab-step-num">3</div><span>Website langsung jalan normal! ✅</span></div>
+    const step2text = isIOS
+      ? `Pilih <b>"Open in Safari"</b> atau <b>"Open in Browser"</b>`
+      : `Pilih <b>"Buka di Browser"</b> atau <b>"Open in Chrome"</b>`;
+
+    box.innerHTML = `
+      <div class="iab-icon">😅</div>
+      <div class="iab-title">Website ini butuh browser dulu!</div>
+      <div class="iab-sub">Kamu lagi buka di browser TikTok.<br>Tombol WA & Discord gak bisa jalan di sini.<br><strong>Caranya gampang banget, ikutin 2 langkah ini:</strong></div>
+      <div class="iab-steps">
+        <div class="iab-step">
+          <div class="iab-step-num">1</div>
+          <div class="iab-step-text">Tap <span class="iab-dots-badge">⋮ ⋮ ⋮</span> <b>titik tiga</b> di pojok kanan atas ☝️</div>
         </div>
-        <button class="iab-close" onclick="document.getElementById('iabOverlay').style.display='none'">✅ Oke, Mengerti!</button>
-        <button class="iab-dismiss" onclick="document.getElementById('iabOverlay').style.display='none'">Lanjut di browser ini aja (fitur terbatas)</button>
-      `;
-    } else {
-      // Android fallback: Chrome tidak terinstall atau intent gagal
-      arrow.style.display = 'flex';
-      box.innerHTML = `
-        <div class="iab-icon">🌐</div>
-        <div class="iab-title">Buka di Chrome dulu ya!</div>
-        <div class="iab-sub">Kamu lagi buka via browser TikTok.<br>Biar semua fitur bisa jalan, buka di Chrome:</div>
-        <div class="iab-steps">
-          <div class="iab-step"><div class="iab-step-num">1</div><span>Tap ikon <strong>⋮ tiga titik</strong> di pojok kanan atas</span></div>
-          <div class="iab-step"><div class="iab-step-num">2</div><span>Pilih <strong>"Buka di Browser"</strong> atau <strong>"Open in Chrome"</strong></span></div>
-          <div class="iab-step"><div class="iab-step-num">3</div><span>Semua tombol WA & Discord langsung bisa! ✅</span></div>
+        <div class="iab-step">
+          <div class="iab-step-num">2</div>
+          <div class="iab-step-text">${step2text}</div>
         </div>
-        <button class="iab-close" onclick="document.getElementById('iabOverlay').style.display='none'">✅ Oke, Mengerti!</button>
-        <button class="iab-dismiss" onclick="document.getElementById('iabOverlay').style.display='none'">Lanjut di browser ini aja (fitur terbatas)</button>
-      `;
-    }
+        <div class="iab-step">
+          <div class="iab-step-num">✅</div>
+          <div class="iab-step-text">Website langsung jalan normal, WA & Discord bisa dipencet!</div>
+        </div>
+      </div>
+      <button class="iab-close" onclick="document.getElementById('iabOverlay').style.display='none'">
+        Oke ngerti, tutup dulu 👍
+      </button>
+      <button class="iab-dismiss" onclick="document.getElementById('iabOverlay').style.display='none'">
+        Tetap di sini (fitur terbatas)
+      </button>
+    `;
 
     overlay.style.display = 'flex';
   }
 
   (function detectInAppBrowser() {
     const ua = navigator.userAgent || '';
-    const isAndroid = /Android/i.test(ua);
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isInApp =
       /musical_ly|TikTok|BytedanceWebview|ByteLocale/i.test(ua) ||
@@ -888,42 +902,7 @@ style="height:44px;width:44px;object-fit:cover;border-radius:10px;flex-shrink:0;
       (isIOS && !/Safari/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua));
 
     if (!isInApp) return;
-
-    // ✅ ANDROID: Coba paksa buka di Chrome via Android Intent URL
-    if (isAndroid) {
-      // Tampilkan loading dulu
-      const overlay = document.getElementById('iabOverlay');
-      const box = document.getElementById('iabBox');
-      box.innerHTML = `
-        <div class="iab-loading">
-          <div class="iab-spinner"></div>
-          <div class="iab-loading-text">Membuka di Chrome...</div>
-        </div>
-      `;
-      overlay.style.display = 'flex';
-
-      // Trigger Android Intent URL setelah 300ms (beri waktu overlay render)
-      setTimeout(function() {
-        const rawUrl = window.location.href.replace(/^https?:\/\//, '');
-        const fallback = encodeURIComponent(window.location.href);
-        const chromeIntent = 'intent://' + rawUrl
-          + '#Intent;scheme=https;package=com.android.chrome'
-          + ';S.browser_fallback_url=' + fallback
-          + ';end';
-        window.location.href = chromeIntent;
-      }, 300);
-
-      // Jika setelah 2.5 detik masih di sini -> Chrome tidak ada, tampilkan panduan
-      setTimeout(function() {
-        if (document.getElementById('iabOverlay').style.display !== 'none') {
-          showIABOverlay(false);
-        }
-      }, 2500);
-      return;
-    }
-
-    // ✅ iOS: Tidak bisa auto-redirect, langsung tampilkan panduan
-    showIABOverlay(true);
+    showIABOverlay(isIOS);
   })();
 
   function renderProductImages() {
