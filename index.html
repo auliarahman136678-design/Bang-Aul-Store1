@@ -130,6 +130,23 @@
     .playstore-share-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:22px;padding:5px 14px;font-size:.72rem;font-weight:800;cursor:pointer;flex-shrink:0;transition:background .15s,transform .1s}
     .playstore-share-btn:hover{background:rgba(255,255,255,.28)}
     .playstore-share-btn:active{transform:scale(.95)}
+    /* IN-APP BROWSER BANNER */
+    .iab-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:flex;align-items:flex-end;justify-content:center;animation:fadeInOverlay .3s ease}
+    @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+    .iab-box{background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;text-align:center;animation:slideUp .35s ease}
+    @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .iab-icon{font-size:3rem;margin-bottom:8px}
+    .iab-title{font-size:1.05rem;font-weight:800;color:#0f172a;margin-bottom:6px}
+    .iab-sub{font-size:.8rem;color:#64748b;line-height:1.5;margin-bottom:16px}
+    .iab-steps{background:#f0f6ff;border-radius:14px;padding:12px 14px;margin-bottom:16px;text-align:left}
+    .iab-step{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:700;color:#0f172a;padding:6px 0}
+    .iab-step+.iab-step{border-top:1px solid #dbeafe}
+    .iab-step-num{width:24px;height:24px;min-width:24px;border-radius:50%;background:#4096ff;color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+    .iab-arrow{position:fixed;top:12px;right:12px;z-index:100000;animation:bounceArrow 1s ease-in-out infinite}
+    @keyframes bounceArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    .iab-arrow-box{background:#f7931e;color:#fff;border-radius:12px;padding:8px 14px;font-size:.78rem;font-weight:800;display:flex;align-items:center;gap:6px;box-shadow:0 4px 16px rgba(247,147,30,.5)}
+    .iab-close{background:#4096ff;color:#fff;border:none;border-radius:14px;padding:13px;width:100%;font-size:.88rem;font-weight:800;cursor:pointer;margin-top:4px}
+    .iab-dismiss{font-size:.72rem;color:#94a3b8;margin-top:10px;cursor:pointer;display:block;background:none;border:none;width:100%}
     .toast-notif{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e293b;color:#fff;font-size:.8rem;font-weight:700;padding:9px 20px;border-radius:22px;box-shadow:0 4px 18px rgba(0,0,0,.3);z-index:9999;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap}
     .toast-notif.show{opacity:1;transform:translateX(-50%) translateY(0)}
     .cara-beli{margin:14px 12px 0;border-radius:14px;background:var(--card-bg);border:1.5px solid var(--border);padding:14px 12px;box-shadow:var(--card-shadow)}
@@ -291,6 +308,41 @@
 
 <div class="toast-notif" id="toastNotif">✅ Link berhasil disalin!</div>
 
+<!-- IN-APP BROWSER DETECTION OVERLAY -->
+<div class="iab-overlay" id="iabOverlay" style="display:none">
+  <!-- Arrow pointing to 3 dots -->
+  <div class="iab-arrow">
+    <div class="iab-arrow-box">
+      <i class="bi bi-three-dots-vertical"></i> Tap di sini dulu! ☝️
+    </div>
+  </div>
+  <div class="iab-box">
+    <div class="iab-icon">🌐</div>
+    <div class="iab-title">Buka di Browser dulu ya!</div>
+    <div class="iab-sub">Kamu lagi buka via browser TikTok.<br>Biar WA, Discord & Donate bisa langsung jalan,<br><strong>ikutin langkah ini:</strong></div>
+    <div class="iab-steps">
+      <div class="iab-step">
+        <div class="iab-step-num">1</div>
+        <span>Tap ikon <strong>⋮ tiga titik</strong> di pojok kanan atas</span>
+      </div>
+      <div class="iab-step">
+        <div class="iab-step-num">2</div>
+        <span>Pilih <strong>"Buka di Browser"</strong> atau <strong>"Open in Browser"</strong></span>
+      </div>
+      <div class="iab-step">
+        <div class="iab-step-num">3</div>
+        <span>Website langsung jalan normal! ✅</span>
+      </div>
+    </div>
+    <button class="iab-close" onclick="document.getElementById('iabOverlay').style.display='none'">
+      ✅ Oke, Mengerti!
+    </button>
+    <button class="iab-dismiss" onclick="document.getElementById('iabOverlay').style.display='none'">
+      Lanjut di browser ini aja (fitur terbatas)
+    </button>
+  </div>
+</div>
+
 <nav class="navbar">
 <img src="https://i.ibb.co.com/3y9mTLTy/Desain-tanpa-judul-4.png" alt="Logo" 
 style="height:44px;width:44px;object-fit:cover;border-radius:10px;flex-shrink:0;" />
@@ -349,7 +401,7 @@ style="height:44px;width:44px;object-fit:cover;border-radius:10px;flex-shrink:0;
     <a class="hero-social-btn discord" href="https://discord.gg/ndF2R3EN9d" target="_blank" rel="noopener">
       <div class="hero-btn-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 16 16">
-          <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path>
+          <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
         </svg>
       </div>
       <div class="hero-btn-body">
@@ -1515,6 +1567,23 @@ style="height:44px;width:44px;object-fit:cover;border-radius:10px;flex-shrink:0;
     const t = LANG[currentLang];
     window.open(`https://wa.me/${CONFIG.waNumber}?text=${encodeURIComponent(t.waMsg(CONFIG.storeName))}`, '_blank');
   }
+
+  // ================================================================
+  // 📱 IN-APP BROWSER DETECTION (TikTok, Instagram, Facebook, dll)
+  // ================================================================
+  (function detectInAppBrowser() {
+    const ua = navigator.userAgent || '';
+    const isInApp =
+      /musical_ly|TikTok|BytedanceWebview|ByteLocale/i.test(ua) || // TikTok
+      /Instagram/i.test(ua) ||                                       // Instagram
+      /FBAN|FBAV|FB_IAB|FB4A|FBIOS/i.test(ua) ||                   // Facebook
+      /Line\//i.test(ua) ||                                          // Line
+      /Twitter/i.test(ua) ||                                         // Twitter
+      ((/iPhone|iPad|iPod/i.test(ua)) && !/Safari/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua));
+    if (isInApp) {
+      document.getElementById('iabOverlay').style.display = 'flex';
+    }
+  })();
 </script>
 </body>
 </html>
